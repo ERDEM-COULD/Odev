@@ -1,71 +1,178 @@
-body {
+:root {
+  --primary: #FF6B6B;
+  --secondary: #4ECDC4;
+  --accent: #FFE66D;
+  --dark: #292F36;
+  --light: #F7FFF7;
+  --transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Georgia', serif;
-  background-color: #000;
-  color: #fff;
-  overflow: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+  color: var(--light);
+  overflow-x: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--dark), #1A1A2E);
+  z-index: -1;
 }
 
 .slide {
-  display: none;
+  position: absolute;
   width: 100%;
   height: 100vh;
+  display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 40px;
-  box-sizing: border-box;
+  padding: 20px;
   opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(20px);
+  transition: var(--transition);
 }
 
 .slide.active {
-  display: flex;
   opacity: 1;
-  transform: scale(1);
-  animation: zoomFadeIn 1s ease forwards;
+  transform: translateY(0);
 }
 
-@keyframes zoomFadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.title-card, .content-card {
+  background: rgba(41, 47, 54, 0.85);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+}
+
+.title-card {
+  padding: 3rem;
 }
 
 h1 {
-  font-size: 3rem;
-  color: #ff6666; /* Açık kırmızı */
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 h2 {
-  font-size: 2rem;
-  color: #ffdd57;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: var(--secondary);
+}
+
+.divider {
+  height: 4px;
+  width: 120px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  margin: 1.5rem auto;
+  border-radius: 2px;
+}
+
+.divider-small {
+  height: 2px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  margin: 1rem auto;
+  border-radius: 1px;
+}
+
+.divider-poem {
+  height: 2px;
+  width: 150px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  margin: 0.8rem auto 1.5rem;
+  border-radius: 1px;
 }
 
 p {
+  font-family: 'Roboto', sans-serif;
   font-size: 1.2rem;
-  margin-top: 1rem;
-  color: #ccc;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.title-card p span {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 12px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+    background: var(--primary);
+  }
+}
+
+.poem-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.poem-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 #poem-container {
-  width: 90%;
-  max-width: 1000px;
-  height: 70vh;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px;
+  width: 100%;
+  height: 65vh;
+  overflow-y: auto;
+  padding: 15px;
   scrollbar-width: thin;
-  scrollbar-color: #555 #222;
+  scrollbar-color: var(--primary) var(--dark);
 }
 
 #poem-container::-webkit-scrollbar {
@@ -73,89 +180,141 @@ p {
 }
 
 #poem-container::-webkit-scrollbar-track {
-  background: #222;
-}
-
-#poem-container::-webkit-scrollbar-thumb {
-  background-color: #555;
+  background: var(--dark);
   border-radius: 4px;
 }
 
-.line {
+#poem-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--secondary));
+  border-radius: 4px;
+}
+
+.poem-line {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 1.3rem;
-  line-height: 2.2rem;
-  margin-bottom: 10px;
+  margin-bottom: 1.2rem;
   opacity: 0;
-  transition: opacity 0.5s ease, background-color 0.5s ease;
-  background-color: black;
-  padding: 5px 10px;
-  border-radius: 5px;
+  transform: translateX(20px);
+  transition: var(--transition);
+  padding: 12px 15px;
+  border-radius: 8px;
+  background: rgba(41, 47, 54, 0.7);
 }
 
-.line.visible {
+.poem-line.visible {
   opacity: 1;
-  font-weight: bold;
-  text-shadow: 0 0 10px #ffdd57;
-  animation: slideFadeIn 0.8s ease forwards;
+  transform: translateX(0);
 }
 
-@keyframes slideFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
+.line-english, .line-turkish {
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  padding: 5px 0;
+}
+
+.line-english {
+  color: var(--primary);
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.line-turkish {
+  color: var(--accent);
+  font-weight: 500;
+  text-align: left;
+}
+
+#producer, #thankyou {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 500px;
+  display: none;
+  z-index: 10;
+}
+
+.author-card, .thankyou-card {
+  background: rgba(41, 47, 54, 0.9);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  animation: scaleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.thankyou-card {
+  padding: 2.5rem;
+}
+
+.thankyou-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+@keyframes scaleIn {
   to {
+    transform: scale(1);
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
-.line.active-prev {
-  background-color: #111;
+@media (min-width: 768px) {
+  .poem-line {
+    flex-wrap: nowrap;
+  }
+  
+  .line-english, .line-turkish {
+    width: 48%;
+  }
+  
+  .line-english {
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 0;
+    position: relative;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .line-turkish {
+    text-align: left;
+    padding-left: 20px;
+  }
+  
+  h1 {
+    font-size: 3.5rem;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+  }
 }
 
-/* İngilizce açık kırmızı */
-.line .eng {
-  width: 48%;
-  color: #ff6666; /* Açık kırmızı */
-  font-weight: 600;
-}
-
-/* Türkçe sarı */
-.line .tr {
-  width: 48%;
-  color: #ffdd57;
-  font-weight: 600;
-}
-
-#thankyou {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: #ffdd57;
-  text-align: center;
-  text-shadow: 0 0 15px #ffdd57;
-  display: none;
-  animation: fadeInThankyou 2s ease forwards;
-}
-
-@keyframes fadeInThankyou {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-#producer {
-    position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: #ffdd57;
-  text-align: center;
-  text-shadow: 0 0 15px #ffdd57;
-  display: none;
-  animation: fadeInThankyou 2s ease forwards;
+@media (max-width: 480px) {
+  .title-card, .content-card {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .poem-line {
+    padding: 10px;
+  }
+  
+  .line-english, .line-turkish {
+    font-size: 1.1rem;
+  }
 }
