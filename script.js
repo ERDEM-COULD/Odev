@@ -5,6 +5,7 @@ let currentLineIndex = -1;
 const audio = document.getElementById("audio");
 const clapAudio = document.getElementById("clap-audio");
 const thankYou = document.getElementById("thankyou");
+const producer = document.getElementById("producer");
 const poemContainer = document.getElementById("poem-container");
 
 const poemLines = [
@@ -25,21 +26,21 @@ const poemLines = [
 
 // Şiir satırlarını oluştur
 poemLines.forEach((line, i) => {
-  const div = document.createElement("div");
-  div.classList.add("line");
-  div.setAttribute("data-index", i);
+  const lineDiv = document.createElement("div");
+  lineDiv.classList.add("poem-line");
+  lineDiv.setAttribute("data-index", i);
 
-  const eng = document.createElement("div");
-  eng.classList.add("eng");
-  eng.textContent = line.eng;
+  const engDiv = document.createElement("div");
+  engDiv.classList.add("line-english");
+  engDiv.textContent = line.eng;
 
-  const tr = document.createElement("div");
-  tr.classList.add("tr");
-  tr.textContent = line.tr;
+  const trDiv = document.createElement("div");
+  trDiv.classList.add("line-turkish");
+  trDiv.textContent = line.tr;
 
-  div.appendChild(eng);
-  div.appendChild(tr);
-  poemContainer.appendChild(div);
+  lineDiv.appendChild(engDiv);
+  lineDiv.appendChild(trDiv);
+  poemContainer.appendChild(lineDiv);
 });
 
 document.addEventListener("click", () => {
@@ -70,38 +71,56 @@ document.addEventListener("click", () => {
       }
       clapAudio.play();
       poemContainer.style.display = "none";
-      thankYou.style.display = "block";
-      poemStarted = false;
+      
+      // Önce yazar bilgisi göster
+      producer.style.display = "block";
+      
+      // 3 saniye sonra teşekkür mesajı
+      setTimeout(() => {
+        producer.style.display = "none";
+        thankYou.style.display = "block";
+        poemStarted = false;
+      }, 3000);
     }
   }
 });
 
 function showNextLine() {
-  const lines = document.querySelectorAll(".line");
+  const lines = document.querySelectorAll(".poem-line");
 
   if (currentLineIndex >= 0) {
     lines[currentLineIndex].classList.remove("visible");
-    lines[currentLineIndex].style.backgroundColor = "black";
   }
 
   currentLineIndex++;
 
   if (currentLineIndex < lines.length) {
     lines[currentLineIndex].classList.add("visible");
-    lines[currentLineIndex].style.backgroundColor = "#111";
-
-    if (currentLineIndex > 0) {
-      lines[currentLineIndex - 1].style.backgroundColor = "#111";
+    
+    // Son satır için özel stil
+    if (currentLineIndex === lines.length - 1) {
+      lines[currentLineIndex].style.justifyContent = "center";
+      lines[currentLineIndex].style.gap = "20px";
+      lines[currentLineIndex].style.fontStyle = "italic";
+      lines[currentLineIndex].style.marginTop = "30px";
     }
-    if (currentLineIndex > 1) {
-      lines[currentLineIndex - 2].style.backgroundColor = "black";
-    }
 
-    lines[currentLineIndex].scrollIntoView({ behavior: "smooth", block: "center" });
+    // Yumuşak kaydırma efekti
+    lines[currentLineIndex].scrollIntoView({ 
+      behavior: "smooth", 
+      block: "center" 
+    });
 
+    // İlk satırda müziği başlat
     if (currentLineIndex === 0 && poemStarted) {
-      audio.play().catch(e => console.log("Şarkı çalma hatası:", e));
+      audio.play().catch(e => console.log("Audio play error:", e));
     }
   }
 }
 
+// Klavye kontrolü
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight" || e.key === " " || e.key === "Enter") {
+    document.dispatchEvent(new Event("click"));
+  }
+});
