@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Şiir Sunumu</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="background"></div>
+  
   <audio id="audio" preload="auto">
-    <source src="music.mp3" type="audio/mp3" />
+    <source src="music.mp3" type="audio/mp3">
   </audio>
 
   <audio id="clap-audio" preload="auto">
-    <source src="alkis.mp3" type="audio/mp3" />
+    <source src="alkis.mp3" type="audio/mp3">
   </audio>
 
   <div id="slideshow">
     <!-- Slayt 1 -->
     <section class="slide active" id="slide-1">
-      <h1>İngilizce Sunum Ödevi</h1>
-      <p>Yapımcı: Mehmet Erdem Duman</p>
-      <p>Konu: Şiir</p>
+      <div class="title-card">
+        <h1>İngilizce Sunum</h1>
+        <div class="divider"></div>
+        <p>Hazırlayan: <span>Mehmet Erdem Duman</span></p>
+        <p>Konu: <span>Victor Hugo Şiiri</span></p>
+      </div>
     </section>
 
     <!-- Slayt 2 -->
     <section class="slide" id="slide-2">
-      <h2>Merhaba arkadaşlar.</h2>
-      <p>Ben Erdem. Bugün size şiir okuyacağım.</p>
+      <div class="content-card">
+        <h2>Merhaba Arkadaşlar</h2>
+        <div class="divider-small"></div>
+        <p>Ben Erdem. Bugün size Victor Hugo'nun şiirini İngilizce ve Türkçe olarak sunacağım.</p>
+      </div>
     </section>
 
     <!-- Slayt 3 -->
     <section class="slide" id="slide-3">
-      <h2>Hadi başlayalım.</h2>
+      <div class="content-card">
+        <h2>Hadi Başlayalım</h2>
+        <div class="divider-small"></div>
+        <div class="loading-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
     </section>
 
     <!-- Slayt 4 - Şiir -->
     <section class="slide" id="slide-4">
-      <div id="poem-container"></div>
+      <div class="poem-wrapper">
+        <div class="poem-header">
+          <h3>Victor Hugo</h3>
+          <div class="divider-poem"></div>
+        </div>
+        <div id="poem-container"></div>
+      </div>
     </section>
   </div>
-  <div id="producer">Yazar: Victor Hugo</div>
-  <div id="thankyou">Beni dinlediğiniz için teşekkürler</div>
 
-  <div id="producer">Yazar: Victor Hugo</div>
+  <div id="producer">
+    <div class="author-card">
+      <h3>Şiir Yazarı</h3>
+      <div class="divider-small"></div>
+      <p>Victor Hugo</p>
+    </div>
+  </div>
+
+  <div id="thankyou">
+    <div class="thankyou-card">
+      <h2>Teşekkürler</h2>
+      <div class="divider-small"></div>
+      <p>Beni dinlediğiniz için teşekkür ederim</p>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
