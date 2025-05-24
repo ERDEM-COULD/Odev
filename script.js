@@ -19,7 +19,8 @@ const poemLines = [
   { eng: "Did the roses wilting branches to be broken?", tr: "Güller dalından kopunca mı solar?" },
   { eng: "It does not fade while a pink rosebud on rose branches?", tr: "Dalında bir gonca solmaz mı?" },
   { eng: "Weapons to kill, should it be the dagger?", tr: "Öldürmek için silah mı gerek?" },
-  { eng: "Hair ties, weapons eyes, smile, do not lead?", tr: "Saç, göz, bir gülüş; öldürmez mi?" }
+  { eng: "Hair ties, weapons eyes, smile, do not lead?", tr: "Saç, göz, bir gülüş; öldürmez mi?" },
+  { eng: "Producer: Victor Hugo", tr: "Yazar: Victor Hugo" }
 ];
 
 // Şiir satırlarını oluştur
@@ -103,3 +104,4 @@ function showNextLine() {
     }
   }
 }
+
