@@ -84,7 +84,7 @@ document.addEventListener("click", () => {
         // 3 saniye sonra Google'a yönlendir
         setTimeout(() => {
           window.location.href = "https://www.google.com";
-        }, 3000);
+        }, 4500);
       }, 3000);
     }
   }
