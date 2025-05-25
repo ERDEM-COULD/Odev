@@ -71,15 +71,20 @@ document.addEventListener("click", () => {
       }
       clapAudio.play();
       poemContainer.style.display = "none";
-      
+
       // Önce yazar bilgisi göster
       producer.style.display = "block";
-      
+
       // 3 saniye sonra teşekkür mesajı
       setTimeout(() => {
         producer.style.display = "none";
         thankYou.style.display = "block";
         poemStarted = false;
+
+        // 3 saniye sonra Google'a yönlendir
+        setTimeout(() => {
+          window.location.href = "https://www.google.com";
+        }, 3000);
       }, 3000);
     }
   }
@@ -96,7 +101,7 @@ function showNextLine() {
 
   if (currentLineIndex < lines.length) {
     lines[currentLineIndex].classList.add("visible");
-    
+
     // Son satır için özel stil
     if (currentLineIndex === lines.length - 1) {
       lines[currentLineIndex].style.justifyContent = "center";
@@ -106,9 +111,9 @@ function showNextLine() {
     }
 
     // Yumuşak kaydırma efekti
-    lines[currentLineIndex].scrollIntoView({ 
-      behavior: "smooth", 
-      block: "center" 
+    lines[currentLineIndex].scrollIntoView({
+      behavior: "smooth",
+      block: "center"
     });
 
     // İlk satırda müziği başlat
@@ -124,3 +129,4 @@ document.addEventListener("keydown", (e) => {
     document.dispatchEvent(new Event("click"));
   }
 });
+
