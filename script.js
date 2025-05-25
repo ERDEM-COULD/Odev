@@ -9,7 +9,7 @@ const producer = document.getElementById("producer");
 const poemContainer = document.getElementById("poem-container");
 
 const poemLines = [
-  { eng: "Should current age of the eye to cry?", tr: "Ağlamak için yaş mı gerekir?" },
+  { eng: "Do tears have to flow from eyes to cry?", tr: "Ağlamak için gözden yaş mı akmalı?" },
   { eng: "Lips laughing, people do not cry?", tr: "Gülen dudaklar, insan ağlamaz mı?" },
   { eng: "Should be looking at the beautiful to love?", tr: "Sevmek için güzel mi bakmalı?" },
   { eng: "Ugly skin a beautiful soul, does not bind the heart?", tr: "Çirkin bir ten, güzel bir ruh; gönül bağlamaz mı?" },
