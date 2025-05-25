@@ -49,7 +49,7 @@ document.addEventListener("click", () => {
     currentSlide++;
     slides[currentSlide].classList.add("active");
 
-    if (currentSlide === 3) {
+    if (currentSlide === 7) {
       if (!audio.paused) {
         audio.pause();
         audio.currentTime = 0;
